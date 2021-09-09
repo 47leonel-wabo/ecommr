@@ -1,8 +1,19 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import "./productItemMenu.styles.scss";
 
-const ProductItemMenu = ({ title, imageUrl, size }) => (
-    <div className={`${size} product`}>
+const ProductItemMenu = ({
+    title,
+    imageUrl,
+    size,
+    history,
+    match,
+    linkUrl,
+}) => (
+    <div
+        className={`${size} product`}
+        onClick={() => history.push(`${match.url}${linkUrl}`)}
+    >
         <div
             className="bg-image"
             style={{
@@ -16,4 +27,5 @@ const ProductItemMenu = ({ title, imageUrl, size }) => (
     </div>
 );
 
-export default ProductItemMenu;
+// With this, now we have access to 'history' property
+export default withRouter(ProductItemMenu);
