@@ -1,5 +1,5 @@
 import React from "react";
-import ProductDirectory from "../components/productDirectory/ProductDirectory";
+import ProductDirectory from "../../components/productDirectory/ProductDirectory";
 
 import "./homepage.styles.scss";
 
