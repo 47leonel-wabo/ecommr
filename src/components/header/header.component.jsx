@@ -20,7 +20,7 @@ const NavHeader = ({ currentUser }) => {
                 </Link>
                 {currentUser ? (
                     <div className="option" onClick={() => auth.signOut()}>
-                        Sign Out |{" "}
+                        {/* Sign Out |{" "}
                         <strong
                             style={{
                                 color: "tomato",
@@ -31,7 +31,7 @@ const NavHeader = ({ currentUser }) => {
                                     " "
                                 )[0]
                             }
-                        </strong>
+                        </strong> */}
                     </div>
                 ) : (
                     <Link className="option" to="/signin">
