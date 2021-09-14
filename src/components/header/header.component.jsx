@@ -17,6 +17,9 @@ const NavHeader = () => {
                 <Link to="/contact" className="option">
                     Contact
                 </Link>
+                <Link to="/signin-signup" className="option">
+                    Sign In
+                </Link>
             </div>
         </div>
     );
