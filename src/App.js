@@ -5,19 +5,45 @@ import HatArticles from "./pages/articles/hats/HatArticles";
 import HomePage from "./pages/home/HomePage";
 import ShopPage from "./pages/shop/shop.component";
 import SignInSignUp from "./pages/signin/singin.signup.component";
+import { auth } from "./firebase/firebase.utils";
+import React from "react";
 
-function App() {
-    return (
-        <div>
-            <NavHeader />
-            <Switch>
-                <Route exact path="/" component={HomePage} />
-                <Route path="/shop" component={ShopPage} />
-                <Route path="/hats" component={HatArticles} />
-                <Route path="/signin-signup" component={SignInSignUp} />
-            </Switch>
-        </div>
-    );
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loggedUser: null,
+        };
+    }
+
+    unsubscribeFromAuth = null;
+
+    componentDidMount() {
+        // subscribe to auth
+        this.unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
+            this.setState({ loggedUser: user });
+            console.log(user);
+        });
+    }
+
+    componentWillUnmount() {
+        this.unsubscribeFromAuth();
+    }
+
+    render = () => {
+        const { loggedUser } = this.state;
+        return (
+            <div>
+                <NavHeader currentUser={loggedUser} />
+                <Switch>
+                    <Route exact path="/" component={HomePage} />
+                    <Route path="/shop" component={ShopPage} />
+                    <Route path="/hats" component={HatArticles} />
+                    <Route path="/signin" component={SignInSignUp} />
+                </Switch>
+            </div>
+        );
+    };
 }
 
 export default App;

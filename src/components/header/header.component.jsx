@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { auth } from "../../firebase/firebase.utils";
 import "./header.style.scss";
 
-const NavHeader = () => {
+const NavHeader = ({ currentUser }) => {
     return (
         <div className="header">
             <Link to="/" className="logo-container">
@@ -17,9 +18,26 @@ const NavHeader = () => {
                 <Link to="/contact" className="option">
                     Contact
                 </Link>
-                <Link to="/signin-signup" className="option">
-                    Sign In
-                </Link>
+                {currentUser ? (
+                    <div className="option" onClick={() => auth.signOut()}>
+                        Sign Out |{" "}
+                        <strong
+                            style={{
+                                color: "tomato",
+                            }}
+                        >
+                            {
+                                currentUser.multiFactor.user.displayName.split(
+                                    " "
+                                )[0]
+                            }
+                        </strong>
+                    </div>
+                ) : (
+                    <Link className="option" to="/signin">
+                        Sign In
+                    </Link>
+                )}
             </div>
         </div>
     );
