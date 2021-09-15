@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { auth } from "../../firebase/firebase.utils";
 import "./header.style.scss";
 
-const NavHeader = ({ loggedUser }) => {
+const NavHeader = ({ currentUser }) => {
+    console.log("CURRENT USER ", currentUser);
     return (
         <div className="header">
             <Link to="/" className="logo-container">
@@ -19,16 +20,16 @@ const NavHeader = ({ loggedUser }) => {
                 <Link to="/contact" className="option">
                     Contact
                 </Link>
-                {loggedUser ? (
+                {currentUser !== null ? (
                     <div className="option" onClick={() => auth.signOut()}>
                         Sign Out |{" "}
-                        {loggedUser && (
+                        {currentUser && (
                             <strong
                                 style={{
                                     color: "tomato",
                                 }}
                             >
-                                {loggedUser.displayName}
+                                {currentUser.displayName}
                             </strong>
                         )}
                     </div>
@@ -43,6 +44,7 @@ const NavHeader = ({ loggedUser }) => {
 };
 
 const mapStateToProps = (rootReducerState) => ({
-    loggedUser: rootReducerState.user.loggedUser,
+    // currentUser will be passed as props to this component
+    currentUser: rootReducerState.user.loggedUser,
 });
 export default connect(mapStateToProps)(NavHeader);

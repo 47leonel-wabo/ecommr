@@ -11,17 +11,10 @@ import SignInSignUp from "./pages/signin/singin.signup.component";
 import { setCurrentUser } from "./redux/user/user.actions";
 
 class App extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         loggedUser: null,
-    //     };
-    // }
-
     unsubscribeFromAuth = null;
 
     componentDidMount() {
-        const { setCurrentUser } = this.props;
+        const { setLoggedUser } = this.props;
 
         // subscribe to auth
         this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
@@ -31,16 +24,11 @@ class App extends React.Component {
                 // subscribe to data change
                 userRef.onSnapshot((snp) => {
                     // once user stored in database ,
-                    setCurrentUser({
+                    setLoggedUser({
                         // ((1) - see below) pass data to reducer
                         id: snp.id,
                         ...snp.data(),
                     });
-                });
-            } else {
-                // if userAuth is null, it means logout
-                setCurrentUser({
-                    userAuth,
                 });
             }
         });
@@ -65,8 +53,12 @@ class App extends React.Component {
     };
 }
 
+const mapStateToProps = (rootReducerState) => ({
+    currentUser: rootReducerState.user.currentUser,
+});
+
 const mapDispatchToProps = (dispatch) => ({
-    // setCurrentUser will be passed as props to App (1)
-    setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+    // setLoggedUser will be passed as props to App (1)
+    setLoggedUser: (user) => dispatch(setCurrentUser(user)),
 });
 export default connect(null, mapDispatchToProps)(App);
