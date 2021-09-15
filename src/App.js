@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import NavHeader from "./components/header/header.component";
@@ -7,18 +8,21 @@ import HatArticles from "./pages/articles/hats/HatArticles";
 import HomePage from "./pages/home/HomePage";
 import ShopPage from "./pages/shop/shop.component";
 import SignInSignUp from "./pages/signin/singin.signup.component";
+import { setCurrentUser } from "./redux/user/user.actions";
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loggedUser: null,
-        };
-    }
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         loggedUser: null,
+    //     };
+    // }
 
     unsubscribeFromAuth = null;
 
     componentDidMount() {
+        const { setCurrentUser } = this.props;
+
         // subscribe to auth
         this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
             if (userAuth) {
@@ -26,21 +30,17 @@ class App extends React.Component {
 
                 // subscribe to data change
                 userRef.onSnapshot((snp) => {
-                    // once user stored in database
-                    this.setState(
-                        {
-                            loggedUser: {
-                                id: snp.id,
-                                ...snp.data(),
-                            },
-                        },
-                        () => console.log("LOGGED USER", this.state.loggedUser)
-                    );
+                    // once user stored in database ,
+                    setCurrentUser({
+                        // ((1) - see below) pass data to reducer
+                        id: snp.id,
+                        ...snp.data(),
+                    });
                 });
             } else {
                 // if userAuth is null, it means logout
-                this.setState({
-                    loggedUser: userAuth,
+                setCurrentUser({
+                    userAuth,
                 });
             }
         });
@@ -51,10 +51,9 @@ class App extends React.Component {
     }
 
     render = () => {
-        const { loggedUser } = this.state;
         return (
             <div>
-                <NavHeader currentUser={loggedUser} />
+                <NavHeader />
                 <Switch>
                     <Route exact path="/" component={HomePage} />
                     <Route path="/shop" component={ShopPage} />
@@ -66,4 +65,8 @@ class App extends React.Component {
     };
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => ({
+    // setCurrentUser will be passed as props to App (1)
+    setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+export default connect(null, mapDispatchToProps)(App);
