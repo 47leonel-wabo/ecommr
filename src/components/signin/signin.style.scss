@@ -1,10 +1,10 @@
 .sign-in {
-    width: 35vw;
+    width: 30vw;
     display: flex;
     flex-direction: column;
 
     .title {
-        padding: 10px 0;
+        padding: 16px 0;
     }
 
     .sign-buttons {
@@ -12,5 +12,6 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        // margin: 0 8px;
     }
 }

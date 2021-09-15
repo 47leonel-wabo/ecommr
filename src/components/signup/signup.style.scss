@@ -1,0 +1,14 @@
+.sign-up {
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+
+    .title {
+        padding: 16px 0;
+    }
+
+    .sign-up-buttons {
+        width: 100%;
+        text-align: end;
+    }
+}

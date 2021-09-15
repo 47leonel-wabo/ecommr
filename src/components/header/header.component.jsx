@@ -20,18 +20,16 @@ const NavHeader = ({ currentUser }) => {
                 </Link>
                 {currentUser ? (
                     <div className="option" onClick={() => auth.signOut()}>
-                        {/* Sign Out |{" "}
-                        <strong
-                            style={{
-                                color: "tomato",
-                            }}
-                        >
-                            {
-                                currentUser.multiFactor.user.displayName.split(
-                                    " "
-                                )[0]
-                            }
-                        </strong> */}
+                        Sign Out |{" "}
+                        {currentUser && (
+                            <strong
+                                style={{
+                                    color: "tomato",
+                                }}
+                            >
+                                {currentUser.displayName}
+                            </strong>
+                        )}
                     </div>
                 ) : (
                     <Link className="option" to="/signin">
