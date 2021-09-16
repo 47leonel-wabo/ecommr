@@ -1,3 +1,4 @@
+import { addNewItemToCart } from "../../components/cart/cart.util";
 import {
     CART_ADD_ITEM,
     TOGGLE_CART_ITEM_LIST,
@@ -18,7 +19,7 @@ const cartReducer = (prevSate = INITIAL, action) => {
         case CART_ADD_ITEM:
             return {
                 ...prevSate,
-                cartItems: [...prevSate.cartItems, action.payload],
+                cartItems: addNewItemToCart(prevSate.cartItems, action.payload),
             };
         default:
             return prevSate;

@@ -1,6 +1,6 @@
 export const SHOP_DATA = [
     {
-        id: 1,
+        id: "hats-1",
         title: "Hats",
         routeName: "hats",
         items: [
@@ -56,54 +56,54 @@ export const SHOP_DATA = [
         ],
     },
     {
-        id: 2,
+        id: "sneakers-2",
         title: "Sneakers",
         routeName: "sneakers",
         items: [
             {
-                id: 1,
+                id: 8,
                 name: "Modern white",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2018/04/15/01/02/leg-3320600_960_720.jpg",
                 price: 11,
             },
             {
-                id: 2,
+                id: 9,
                 name: "High sport",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2014/09/03/20/15/shoes-434918_960_720.jpg",
                 price: 12,
             },
             {
-                id: 3,
+                id: 10,
                 name: "Colored pastel",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2016/03/09/09/39/shoes-1245920_960_720.jpg",
                 price: 22,
             },
             {
-                id: 4,
+                id: 11,
                 name: "Full creative",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2017/04/09/18/54/shoes-2216498_960_720.jpg",
                 price: 30,
             },
             {
-                id: 5,
+                id: 12,
                 name: "Air Max",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2016/11/19/18/06/feet-1840619_960_720.jpg",
                 price: 33,
             },
             {
-                id: 6,
+                id: 13,
                 name: "Converse",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2016/03/27/19/39/jump-1283915_960_720.jpg",
                 price: 10,
             },
             {
-                id: 7,
+                id: 14,
                 name: "Fitness model",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2016/11/20/09/13/feet-1842328_960_720.jpg",
@@ -112,54 +112,54 @@ export const SHOP_DATA = [
         ],
     },
     {
-        id: 3,
+        id: "jacket-3",
         title: "Jackets",
         routeName: "jackets",
         items: [
             {
-                id: 1,
+                id: 15,
                 name: "Demin jacket",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2016/11/16/10/26/girl-1828536_960_720.jpg",
                 price: 18,
             },
             {
-                id: 2,
+                id: 16,
                 name: "Burnette",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2016/11/29/11/12/rain-1869119_960_720.jpg",
                 price: 12,
             },
             {
-                id: 3,
+                id: 17,
                 name: "Jacket child",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2016/05/31/11/26/baby-1426651_960_720.jpg",
                 price: 8,
             },
             {
-                id: 4,
+                id: 18,
                 name: "Blond",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2015/09/02/13/24/man-919045_960_720.jpg",
                 price: 30,
             },
             {
-                id: 5,
+                id: 19,
                 name: "Stylish man",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2016/11/29/01/34/man-1866572_960_720.jpg",
                 price: 33,
             },
             {
-                id: 6,
+                id: 20,
                 name: "Forest male",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2016/01/19/18/04/man-1150058_960_720.jpg",
                 price: 10,
             },
             {
-                id: 7,
+                id: 21,
                 name: "Winter clothing",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2016/02/18/17/31/girl-1207641_960_720.jpg",
@@ -168,54 +168,54 @@ export const SHOP_DATA = [
         ],
     },
     {
-        id: 4,
+        id: "women-4",
         title: "Women",
         routeName: "women",
         items: [
             {
-                id: 1,
+                id: 22,
                 name: "Fashion",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2018/03/01/14/57/portrait-3190849_960_720.jpg",
                 price: 18,
             },
             {
-                id: 2,
+                id: 23,
                 name: "Black",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2018/01/24/19/49/people-3104635_960_720.jpg",
                 price: 12,
             },
             {
-                id: 3,
+                id: 24,
                 name: "Happy friends",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2017/08/01/20/52/people-2567915_960_720.jpg",
                 price: 8,
             },
             {
-                id: 4,
+                id: 25,
                 name: "Meeting business",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2017/01/14/10/56/people-1979261_960_720.jpg",
                 price: 30,
             },
             {
-                id: 5,
+                id: 26,
                 name: "Fashion style",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2016/11/16/10/28/girls-1828539_960_720.jpg",
                 price: 33,
             },
             {
-                id: 6,
+                id: 27,
                 name: "Glasses eyeglasses",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2016/10/15/05/02/girls-1741925_960_720.jpg",
                 price: 10,
             },
             {
-                id: 7,
+                id: 28,
                 name: "Team business",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2016/02/19/11/23/women-1209678_960_720.jpg",
@@ -224,54 +224,54 @@ export const SHOP_DATA = [
         ],
     },
     {
-        id: 5,
+        id: "men-5",
         title: "Men",
         routeName: "men",
         items: [
             {
-                id: 1,
+                id: 29,
                 name: "Hoodie",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2015/08/05/04/25/people-875617_960_720.jpg",
                 price: 18,
             },
             {
-                id: 2,
+                id: 30,
                 name: "Dancer",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2016/02/19/10/56/hip-hop-1209499_960_720.jpg",
                 price: 12,
             },
             {
-                id: 3,
+                id: 31,
                 name: "Flower bouquet",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2016/03/09/10/23/man-1246028_960_720.jpg",
                 price: 8,
             },
             {
-                id: 4,
+                id: 32,
                 name: "Bag book",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2016/11/29/09/41/bag-1868758_960_720.jpg",
                 price: 30,
             },
             {
-                id: 5,
+                id: 33,
                 name: "Honor guard",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2012/11/28/10/30/men-67636_960_720.jpg",
                 price: 33,
             },
             {
-                id: 6,
+                id: 34,
                 name: "Balancing",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2016/11/29/07/16/balancing-1868051_960_720.jpg",
                 price: 10,
             },
             {
-                id: 7,
+                id: 35,
                 name: "Man model",
                 imageUrl:
                     "https://cdn.pixabay.com/photo/2016/11/29/01/34/man-1866574_960_720.jpg",
