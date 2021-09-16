@@ -1,9 +1,12 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebase/firebase.utils";
+import CartItemsListDropdown from "../cart/cart-dropdown/cart-dropdown-list.components";
+import CartIcon from "../cart/cart-icon/cartIcon.component";
 import "./header.style.scss";
 
-const NavHeader = ({ currentUser }) => {
+const NavHeader = ({ loggedUser }) => {
     return (
         <div className="header">
             <Link to="/" className="logo-container">
@@ -18,27 +21,31 @@ const NavHeader = ({ currentUser }) => {
                 <Link to="/contact" className="option">
                     Contact
                 </Link>
-                {currentUser ? (
+                {loggedUser ? (
                     <div className="option" onClick={() => auth.signOut()}>
                         Sign Out |{" "}
-                        {currentUser && (
-                            <strong
-                                style={{
-                                    color: "tomato",
-                                }}
-                            >
-                                {currentUser.displayName}
-                            </strong>
-                        )}
+                        <strong
+                            style={{
+                                color: "tomato",
+                            }}
+                        >
+                            {loggedUser.displayName}
+                        </strong>
                     </div>
                 ) : (
                     <Link className="option" to="/signin">
                         Sign In
                     </Link>
                 )}
+                <CartIcon />
             </div>
+            <CartItemsListDropdown />
         </div>
     );
 };
-
-export default NavHeader;
+// get latest state as props
+const mapStateToProps = (rootReducerState) => ({
+    // loggedUser will be passed as props to this component
+    loggedUser: rootReducerState.user.loggedUser,
+});
+export default connect(mapStateToProps)(NavHeader);

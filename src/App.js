@@ -1,5 +1,6 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
+import { Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
 import NavHeader from "./components/header/header.component";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
@@ -7,15 +8,9 @@ import HatArticles from "./pages/articles/hats/HatArticles";
 import HomePage from "./pages/home/HomePage";
 import ShopPage from "./pages/shop/shop.component";
 import SignInSignUp from "./pages/signin/singin.signup.component";
+import { setCurrentUser } from "./redux/user/user.actions";
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loggedUser: null,
-        };
-    }
-
     unsubscribeFromAuth = null;
 
     componentDidMount() {
@@ -25,23 +20,16 @@ class App extends React.Component {
                 const userRef = await createUserProfileDocument(userAuth); // persist sign in user to database
 
                 // subscribe to data change
-                userRef.onSnapshot((snp) => {
-                    // once user stored in database
-                    this.setState(
-                        {
-                            loggedUser: {
-                                id: snp.id,
-                                ...snp.data(),
-                            },
-                        },
-                        () => console.log("LOGGED USER", this.state.loggedUser)
-                    );
+                userRef.onSnapshot((snap) => {
+                    // once user stored in database ,
+                    this.props.setLoggedUser({
+                        // ((1) - see below) pass data to reducer
+                        id: snap.id,
+                        ...snap.data(),
+                    });
                 });
             } else {
-                // if userAuth is null, it means logout
-                this.setState({
-                    loggedUser: userAuth,
-                });
+                this.props.setLoggedUser(userAuth);
             }
         });
     }
@@ -50,20 +38,38 @@ class App extends React.Component {
         this.unsubscribeFromAuth();
     }
 
-    render = () => {
-        const { loggedUser } = this.state;
+    render() {
         return (
             <div>
-                <NavHeader currentUser={loggedUser} />
+                <NavHeader />
                 <Switch>
                     <Route exact path="/" component={HomePage} />
                     <Route path="/shop" component={ShopPage} />
                     <Route path="/hats" component={HatArticles} />
-                    <Route path="/signin" component={SignInSignUp} />
+                    <Route
+                        exact
+                        path="/signin"
+                        render={() =>
+                            this.props.loggedUser ? (
+                                <Redirect to="/" />
+                            ) : (
+                                <SignInSignUp />
+                            )
+                        }
+                    />
                 </Switch>
             </div>
         );
-    };
+    }
 }
-
-export default App;
+// get latest state
+const mapStateToProps = (rootReducerState) => ({
+    loggedUser: rootReducerState.user.loggedUser,
+});
+// trigger dispatch
+const mapDispatchToProps = (dispatch) => ({
+    // setLoggedUser will be passed as props to App (1)
+    setLoggedUser: (user) => dispatch(setCurrentUser(user)),
+});
+// first parameter is 'the state' and the second is 'the dispatcher'
+export default connect(mapStateToProps, mapDispatchToProps)(App);
