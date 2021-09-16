@@ -1,7 +1,11 @@
-import { TOGGLE_CART_ITEM_LIST } from "../../constants/cart-action-types";
+import {
+    CART_ADD_ITEM,
+    TOGGLE_CART_ITEM_LIST,
+} from "../../constants/cart-action-types";
 
 const INITIAL = {
     hidden: true,
+    cartItems: [],
 };
 
 const cartReducer = (prevSate = INITIAL, action) => {
@@ -11,7 +15,11 @@ const cartReducer = (prevSate = INITIAL, action) => {
                 ...prevSate,
                 hidden: !prevSate.hidden, // no need for payload, just switch value to its opposite
             };
-
+        case CART_ADD_ITEM:
+            return {
+                ...prevSate,
+                cartItems: [...prevSate.cartItems, action.payload],
+            };
         default:
             return prevSate;
     }

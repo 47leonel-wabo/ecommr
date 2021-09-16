@@ -5,13 +5,13 @@ Realistic sample ecommerce app with react v17.
 ## Screenshots
 
 * Home
-![step 1](./screenshots/home.png)
+![Home](./screenshots/home.png)
 
 * SignIn | SignUp
-![step 1](./screenshots/signin-signup.png)
+![Sign in - Up](./screenshots/signin-signup.png)
 
 * Shopping
-![step 1](./screenshots/shop.jpg)
+![Shopping](./screenshots/shop.jpg)
 
 ## Features
 

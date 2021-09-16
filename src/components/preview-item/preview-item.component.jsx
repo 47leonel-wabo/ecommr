@@ -1,21 +1,29 @@
 import React from "react";
+import { connect } from "react-redux";
+import { addItem } from "../../redux/cart/cart.actions";
 import CustomButton from "../button/button.component";
 import "./preview-item.style.scss";
 
-const PreviewItem = ({ imageUrl, name, price }) => {
+const PreviewItem = ({ item, addItemToCart }) => {
     return (
         <div className="collection-item">
             <div
                 className="image"
-                style={{ backgroundImage: `url(${imageUrl})` }}
+                style={{ backgroundImage: `url(${item.imageUrl})` }}
             />
             <div className="collection-footer">
-                <span className="name">{name}</span>
-                <span className="price">${price}</span>
+                <span className="name">{item.name}</span>
+                <span className="price">${item.price}</span>
             </div>
-            <CustomButton inverted>Add to cart</CustomButton>
+            <CustomButton onClick={() => addItemToCart(item)} inverted>
+                Add to cart
+            </CustomButton>
         </div>
     );
 };
 
-export default PreviewItem;
+const mapDispatchToProps = (dispatch) => ({
+    addItemToCart: (item) => dispatch(addItem(item)),
+});
+
+export default connect(null, mapDispatchToProps)(PreviewItem);
