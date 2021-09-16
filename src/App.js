@@ -14,22 +14,23 @@ class App extends React.Component {
     unsubscribeFromAuth = null;
 
     componentDidMount() {
-        const { setLoggedUser } = this.props;
-
         // subscribe to auth
         this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
             if (userAuth) {
+                console.log("AUTH USER", userAuth);
                 const userRef = await createUserProfileDocument(userAuth); // persist sign in user to database
-
+                console.log("AUTH REF", userRef);
                 // subscribe to data change
-                userRef.onSnapshot((snp) => {
+                userRef.onSnapshot((snap) => {
                     // once user stored in database ,
-                    setLoggedUser({
+                    this.props.setLoggedUser({
                         // ((1) - see below) pass data to reducer
-                        id: snp.id,
-                        ...snp.data(),
+                        id: snap.id,
+                        ...snap.data(),
                     });
                 });
+            } else {
+                this.props.setLoggedUser(userAuth);
             }
         });
     }
@@ -52,11 +53,11 @@ class App extends React.Component {
         );
     };
 }
-
+// get latest state
 const mapStateToProps = (rootReducerState) => ({
     currentUser: rootReducerState.user.currentUser,
 });
-
+// trigger dispatch
 const mapDispatchToProps = (dispatch) => ({
     // setLoggedUser will be passed as props to App (1)
     setLoggedUser: (user) => dispatch(setCurrentUser(user)),
