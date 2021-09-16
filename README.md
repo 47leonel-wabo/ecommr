@@ -17,7 +17,9 @@ Realistic sample ecommerce app with react v17.
 
 * Google authentication
 * Firebase SignIn - SignUp with email and password
-* Page navigation
+* Page navigation with `react-router-dom`
+* App state management with `redux, react-redux`
+* App state optimal management with `reselect`
 
 ## Credit
 
