@@ -5,7 +5,6 @@ import { auth } from "../../firebase/firebase.utils";
 import "./header.style.scss";
 
 const NavHeader = ({ loggedUser }) => {
-    console.log("CURRENT USER ", loggedUser);
     return (
         <div className="header">
             <Link to="/" className="logo-container">

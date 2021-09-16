@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
 import NavHeader from "./components/header/header.component";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
@@ -17,9 +17,8 @@ class App extends React.Component {
         // subscribe to auth
         this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
             if (userAuth) {
-                console.log("AUTH USER", userAuth);
                 const userRef = await createUserProfileDocument(userAuth); // persist sign in user to database
-                console.log("AUTH REF", userRef);
+
                 // subscribe to data change
                 userRef.onSnapshot((snap) => {
                     // once user stored in database ,
@@ -39,7 +38,7 @@ class App extends React.Component {
         this.unsubscribeFromAuth();
     }
 
-    render = () => {
+    render() {
         return (
             <div>
                 <NavHeader />
@@ -47,19 +46,30 @@ class App extends React.Component {
                     <Route exact path="/" component={HomePage} />
                     <Route path="/shop" component={ShopPage} />
                     <Route path="/hats" component={HatArticles} />
-                    <Route path="/signin" component={SignInSignUp} />
+                    <Route
+                        exact
+                        path="/signin"
+                        render={() =>
+                            this.props.loggedUser ? (
+                                <Redirect to="/" />
+                            ) : (
+                                <SignInSignUp />
+                            )
+                        }
+                    />
                 </Switch>
             </div>
         );
-    };
+    }
 }
 // get latest state
 const mapStateToProps = (rootReducerState) => ({
-    currentUser: rootReducerState.user.currentUser,
+    loggedUser: rootReducerState.user.loggedUser,
 });
 // trigger dispatch
 const mapDispatchToProps = (dispatch) => ({
     // setLoggedUser will be passed as props to App (1)
     setLoggedUser: (user) => dispatch(setCurrentUser(user)),
 });
-export default connect(null, mapDispatchToProps)(App);
+// first parameter is 'the state' and the second is 'the dispatcher'
+export default connect(mapStateToProps, mapDispatchToProps)(App);
