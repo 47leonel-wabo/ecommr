@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebase/firebase.utils";
+import CartItemsListDropdown from "../cart/cart-dropdown/cart-dropdown-list.components";
+import CartIcon from "../cart/cart-icon/cartIcon.component";
 import "./header.style.scss";
 
 const NavHeader = ({ loggedUser }) => {
@@ -35,7 +37,9 @@ const NavHeader = ({ loggedUser }) => {
                         Sign In
                     </Link>
                 )}
+                <CartIcon />
             </div>
+            <CartItemsListDropdown />
         </div>
     );
 };
