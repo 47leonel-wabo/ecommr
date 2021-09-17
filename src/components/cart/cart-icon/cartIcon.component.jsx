@@ -4,16 +4,19 @@ import { ReactComponent as ShoppingBag } from "../../../assets/svg/shopping-bag.
 import { toggleCartItemList } from "../../../redux/cart/cart.actions";
 import "./cartIcon.style.scss";
 
-const CartIcon = ({ setToggleCartList, cartItems }) => {
+const CartIcon = ({ setToggleCartList, itemsCount }) => {
     return (
         <div className="cart-icon" onClick={() => setToggleCartList()}>
             <ShoppingBag className="shopping-bag" />
-            <span className="item-count">{cartItems.length}</span>
+            <span className="item-count">{itemsCount}</span>
         </div>
     );
 };
 const mapStateToProps = (rootReducerState) => ({
-    cartItems: rootReducerState.cart.cartItems,
+    itemsCount: rootReducerState.cart.cartItems.reduce(
+        (accumulatedQty, item) => accumulatedQty + item.quantity,
+        0
+    ),
 });
 const mapDispatchToProps = (dispatch) => ({
     setToggleCartList: () => dispatch(toggleCartItemList()),
