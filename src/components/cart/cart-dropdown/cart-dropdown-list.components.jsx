@@ -26,10 +26,10 @@ const CartItemsListDropdown = ({ hidden, cartItems }) => {
     );
 };
 
-const mapStateToProps = ({ cart: { hidden, cartItems } }) => ({
+const mapStateToProps = (rootReducerState) => ({
     // double destructuring here, read right to left to get meaning
-    hidden,
-    cartItems,
+    hidden: rootReducerState.cart.hidden,
+    cartItems: rootReducerState.cart.cartItems,
 });
 
 export default connect(mapStateToProps, null)(CartItemsListDropdown);
